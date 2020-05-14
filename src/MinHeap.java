@@ -42,7 +42,6 @@ class MinHeap {
             currentPosition = parentElement;
             parentElement = parentElement / 2;
         }
-
     }
     // Take out the element from the root
     //Take out the last element from the last level from the heap and replace the root with the element.

@@ -57,9 +57,12 @@ class Hub {
 
      void createNewGraph() {
         RandomGraphMaker randomGraphMaker = new RandomGraphMaker();
-        // graph = randomGraphMaker.secureGraphNodesAreUnique(randomGraphMaker.setGraph()); //secure graph before init graph variable
-        graph = randomGraphMaker.secureGraphNodesAreUnique(randomGraphMaker.setGraph());
-        randomGraphMaker.checkIfGraphIsCoherent(randomGraphMaker.countWeightBetweenNodes(graph));
+        //graph = randomGraphMaker.secureGraphNodesAreUnique(randomGraphMaker.setGraph()); //secure graph before init graph variable
+         graph = randomGraphMaker.setGraph();
+         while (!randomGraphMaker.secureGraphNodesAreUnique(graph) || !randomGraphMaker.checkIfGraphIsCoherent(randomGraphMaker.countWeightBetweenNodes(graph))) {
+             graph = randomGraphMaker.setGraph();
+         }
+
         utility.printGraph(graph);
     }
 

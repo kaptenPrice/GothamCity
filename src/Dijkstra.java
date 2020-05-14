@@ -19,9 +19,6 @@ class Dijkstra {
 
         //while minHeap is not empty
          while (!getMinHeap().isEmpty()) {
-             if (graph==null){
-                 return null;
-             }
             //Extract the min
             HeapNode extractedNode = getMinHeap().extractMin();
             //Extract vertex

@@ -13,7 +13,9 @@ class SystemTest {
         while (count < 30) {
             graph = randomGraphMaker.secureGraphNodesAreUnique(randomGraphMaker.setGraph());
             randomGraphMaker.checkIfGraphIsCoherent(randomGraphMaker.countWeightBetweenNodes(graph));
+
             utility.printGraph(graph);
+
             count++;
         }
     }

@@ -44,21 +44,22 @@ class RandomGraphMaker {
         for (int i = 0; i < graph.adjacentVerticesList.length; i++) {
             int firstElement = 0;
             int lastElement = graph.adjacentVerticesList[i].size() - 1;
-            for (int j = 0; j < lastElement; j++) {
+            for (int j = 0; j < graph.adjacentVerticesList[i].size()-1; j++) {
                 //checks so that 0 - 1 and 1 - 2  are not the same
                 if (graph.adjacentVerticesList[i].get(j).destination == graph.adjacentVerticesList[i].get(j + 1).destination) {
                     System.out.println("Dubletter finns, this is the night");
                     //creating a new graph
                     //graph = setGraph();
-                    setGraph();
+                    //setGraph();
+                    return null;
                 }
                 //if node has three neighbours, check so that 0 and 2 are not the same
                 if (graph.adjacentVerticesList[i].size() > 2) {
-
                     if (graph.adjacentVerticesList[i].get(firstElement) == graph.adjacentVerticesList[i].get(lastElement)) {
                         System.out.println("Dubletter finns i 3");
                         //  graph = setGraph();
-                        setGraph();
+                      //  setGraph();
+                        return null;
                     }
                 }
             }
@@ -81,7 +82,8 @@ class RandomGraphMaker {
             if (resultSet[i].distance < 0 || resultSet[i].distance > 100) {
                 System.out.println("Not a coherent graph, printing a new one");
                // secureGraphNodesAreUnique();
-                setGraph();
+                //setGraph();
+                return;
             }
         }
         System.out.println("Graph is coherent");

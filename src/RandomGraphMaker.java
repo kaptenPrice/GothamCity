@@ -11,7 +11,6 @@ class RandomGraphMaker {
     }*/
 
     //Provide data for the graph. Make sure each node is connected to 2 or 3 other nodes.
-    //Graph setGraph() {
     Graph setGraph() {
         graph = new Graph();
         System.out.println("Jag skapar en graf, life is fantastic!");
@@ -31,14 +30,14 @@ class RandomGraphMaker {
                 }
             }
         }
-       // secureGraphNodesAreUnique();
+       // secureGraphNodesAreUnique(graph);
          return graph;
     }
 
-    Graph secureGraphNodesAreUnique(Graph graph) {
+    boolean secureGraphNodesAreUnique(Graph graph) {
       this.graph=graph;
         if (graph==null) {
-            setGraph();
+            graph = setGraph();
         }
         System.out.println("Jag gick in i loopen, fångad av en stormvind");
         for (int i = 0; i < graph.adjacentVerticesList.length; i++) {
@@ -50,15 +49,17 @@ class RandomGraphMaker {
                     System.out.println("Dubletter finns, this is the night");
                     //creating a new graph
                     //graph = setGraph();
-                    setGraph();
+                   // setGraph();
+                    return false;
                 }
                 //if node has three neighbours, check so that 0 and 2 are not the same
                 if (graph.adjacentVerticesList[i].size() > 2) {
 
                     if (graph.adjacentVerticesList[i].get(firstElement) == graph.adjacentVerticesList[i].get(lastElement)) {
                         System.out.println("Dubletter finns i 3");
-                        //  graph = setGraph();
-                        setGraph();
+                        //graph = setGraph();
+                        //setGraph();
+                        return false;
                     }
                 }
             }
@@ -66,7 +67,7 @@ class RandomGraphMaker {
         System.out.println("All nodes are unique, caramia");
       //  checkIfGraphIsCoherent(countWeightBetweenNodes(graph));
 
-        return graph;
+        return true;
     }
 
     HeapNode[] countWeightBetweenNodes(Graph graph) {
@@ -75,16 +76,18 @@ class RandomGraphMaker {
         return getMinDistance.dijkstraGetMinDistance(graph, 0);
     }
 
-    void checkIfGraphIsCoherent(HeapNode[] resultSet) {
+    boolean checkIfGraphIsCoherent(HeapNode[] resultSet) {
         System.out.println("Walking in the checkIfNodesAreConnected activated");
         for (int i = 0; i < Constants.NUMBER_OF_VERTICES; i++) {
             if (resultSet[i].distance < 0 || resultSet[i].distance > 100) {
                 System.out.println("Not a coherent graph, printing a new one");
                // secureGraphNodesAreUnique();
-                setGraph();
+                //setGraph();
+                return false;
             }
         }
         System.out.println("Graph is coherent");
+        return true;
     }
 
   /*  void setFixedGraph() {

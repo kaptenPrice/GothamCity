@@ -7,7 +7,8 @@ class Hub {
     private Graph graph;
     private int start, destination;
     private Dijkstra dijkstra = new Dijkstra();
-    Scanner sc;
+    private RandomGraphMaker randomGraphMaker = new RandomGraphMaker();
+    private Scanner sc;
 
     Hub() {
         System.out.println("System online");
@@ -35,8 +36,8 @@ class Hub {
                     }
                     switch (choice) {
                         case "1":
-                            createNewGraph();
-                            planTrip();
+                            graph = randomGraphMaker.createNewGraph();
+                            planTrip(graph);
                             break;
                         case "2":
                             System.out.println("Returning");
@@ -55,18 +56,7 @@ class Hub {
         }
     }
 
-     void createNewGraph() {
-        RandomGraphMaker randomGraphMaker = new RandomGraphMaker();
-        //graph = randomGraphMaker.secureGraphNodesAreUnique(randomGraphMaker.setGraph()); //secure graph before init graph variable
-         graph = randomGraphMaker.setGraph();
-         while (!randomGraphMaker.secureGraphNodesAreUnique(graph) || !randomGraphMaker.checkIfGraphIsCoherent(randomGraphMaker.countWeightBetweenNodes(graph))) {
-             graph = randomGraphMaker.setGraph();
-         }
-
-        utility.printGraph(graph);
-    }
-
-     void planTrip() {
+     private void planTrip(Graph graph) {
         if (graph == null) {
             System.out.println("Please create a graph first. ");
             return;
@@ -97,7 +87,6 @@ class Hub {
         }
         if (start > 0 && start < 11 && destination > 0 && destination < 11) {
             HeapNode[] resultSet = dijkstra.dijkstraGetMinDistance(graph, start - 1);
-            //  dijkstra.checkIfNodesAreConnected(resultSet);
             utility.printDijkstra(resultSet, start - 1, destination - 1);
         }
     }

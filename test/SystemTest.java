@@ -16,7 +16,6 @@ class SystemTest {
                 graph = randomGraphMaker.setGraph();
             }
 
-            // randomGraphMaker.checkIfGraphIsCoherent(randomGraphMaker.countWeightBetweenNodes(graph));
             utility.printGraph(graph);
             count++;
         }

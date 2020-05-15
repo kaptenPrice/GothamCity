@@ -1,5 +1,4 @@
 
-
 class RandomGraphMaker {
     private Dijkstra getMinDistance = new Dijkstra();
     Graph graph;

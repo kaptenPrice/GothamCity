@@ -11,10 +11,11 @@ class SystemTest {
         Utility utility = new Utility();
         int count = 0;
         while (count < 30) {
-            graph = randomGraphMaker.setGraph();
-            while (!randomGraphMaker.secureGraphNodesAreUnique(graph) || !randomGraphMaker.checkIfGraphIsCoherent(randomGraphMaker.countWeightBetweenNodes(graph))) {
-                graph = randomGraphMaker.setGraph();
-            }
+            //graph = randomGraphMaker.setGraph();
+            graph = randomGraphMaker.createNewGraph();
+         //   while (!randomGraphMaker.secureGraphNodesAreUnique(graph) || !randomGraphMaker.checkIfGraphIsCoherent(randomGraphMaker.countWeightBetweenNodes(graph))) {
+           //     graph = randomGraphMaker.setGraph();
+           // }
 
             utility.printGraph(graph);
             count++;

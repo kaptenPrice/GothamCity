@@ -8,8 +8,7 @@ class Dijkstra {
     private MinHeap minHeap;
 
 
-
-     HeapNode[] dijkstraGetMinDistance(Graph graph, int source) {
+    HeapNode[] dijkstraGetMinDistance(Graph graph, int source) {
         setSource(source);
         boolean[] isVisited = new boolean[Constants.NUMBER_OF_VERTICES];
         setArrayOfHeapNodes(createArrayOfHeapNodes());
@@ -18,7 +17,7 @@ class Dijkstra {
         setMinHeap(createMinHeap());
 
         //while minHeap is not empty
-         while (!getMinHeap().isEmpty()) {
+        while (!getMinHeap().isEmpty()) {
             //Extract the min
             HeapNode extractedNode = getMinHeap().extractMin();
             //Extract vertex
@@ -46,8 +45,8 @@ class Dijkstra {
         return getArrayOfHeapNodes();
     }
 
-    private HeapNode[] createArrayOfHeapNodes() {
-      arrayOfHeapNodes = new HeapNode[Constants.NUMBER_OF_VERTICES];
+    HeapNode[] createArrayOfHeapNodes() {
+        arrayOfHeapNodes = new HeapNode[Constants.NUMBER_OF_VERTICES];
         for (int i = 0; i < Constants.NUMBER_OF_VERTICES; i++) {
             arrayOfHeapNodes[i] = new HeapNode();
             arrayOfHeapNodes[i].vertex = i;
@@ -56,7 +55,7 @@ class Dijkstra {
         return arrayOfHeapNodes;
     }
 
-    private MinHeap createMinHeap() {
+    MinHeap createMinHeap() {
         setMinHeap(new MinHeap());
         for (int i = 0; i < Constants.NUMBER_OF_VERTICES; i++) {
             getMinHeap().insert(arrayOfHeapNodes[i]);
@@ -91,27 +90,27 @@ class Dijkstra {
         }
     }*/
 
-    private void setSource(int source) {
+    void setSource(int source) {
         this.source = source;
     }
 
-    private int getSource() {
+    int getSource() {
         return source;
     }
 
-    private MinHeap getMinHeap() {
+    MinHeap getMinHeap() {
         return minHeap;
     }
 
-    private void setMinHeap(MinHeap minHeap) {
+    void setMinHeap(MinHeap minHeap) {
         this.minHeap = minHeap;
     }
 
-    private HeapNode[] getArrayOfHeapNodes() {
+    HeapNode[] getArrayOfHeapNodes() {
         return arrayOfHeapNodes;
     }
 
-    private void setArrayOfHeapNodes(HeapNode[] arrayOfHeapNodes) {
+    void setArrayOfHeapNodes(HeapNode[] arrayOfHeapNodes) {
         this.arrayOfHeapNodes = arrayOfHeapNodes;
     }
 

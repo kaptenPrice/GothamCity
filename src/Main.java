@@ -1,6 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-       new Hub();
+       Hub hub = new Hub();
+       hub.menu();
     }
 }

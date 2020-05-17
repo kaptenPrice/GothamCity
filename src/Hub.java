@@ -12,10 +12,9 @@ class Hub {
 
     Hub() {
         System.out.println("System online");
-        menu();
     }
 
-    private void menu() {
+    void menu() {
 
         while (true) {
 
@@ -86,8 +85,16 @@ class Hub {
             sc.next();
         }
         if (start > 0 && start < 11 && destination > 0 && destination < 11) {
-            HeapNode[] resultSet = dijkstra.dijkstraGetMinDistance(graph, start - 1);
-            utility.printDijkstra(resultSet, start - 1, destination - 1);
+           showDistance(graph, start, destination);
         }
+    }
+
+    //call Dijkstra to obtain the result set and print the result.
+    HeapNode[] showDistance(Graph graph, int start, int destination) {
+        this.graph = graph;
+        HeapNode[] resultSet = dijkstra.dijkstraGetMinDistance(graph, start -1);
+        utility.printDijkstra(resultSet, start -1, destination -1);
+
+        return resultSet;
     }
 }

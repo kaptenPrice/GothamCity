@@ -75,7 +75,7 @@ class RandomGraphMaker {
     boolean checkIfGraphIsCoherent(HeapNode[] resultSet) {
         System.out.println("Walking in the checkIfNodesAreConnected activated");
         for (int i = 0; i < Constants.NUMBER_OF_VERTICES; i++) {
-            if (resultSet[i].distance < 0 || resultSet[i].distance > 100) {
+            if (resultSet[i].getDistance() < 0 || resultSet[i].getDistance() > 100) {
                 System.out.println("Not a coherent graph, printing a new one");
                 return false;
             }
@@ -83,6 +83,8 @@ class RandomGraphMaker {
         System.out.println("Graph is coherent");
         return true;
     }
+
+
 }
 
 

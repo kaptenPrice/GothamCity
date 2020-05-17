@@ -5,12 +5,14 @@ import java.util.LinkedList;
  *
  * */
 class Graph {
+
     LinkedList<Edge>[] adjacentVerticesList;
 
     /**
      * Constructor. Creates a linked list of linked lists. Each inner list is a list of the adjacent vertices of that particular index vertex.
      * */
     Graph() {
+
         adjacentVerticesList = new LinkedList[Constants.NUMBER_OF_VERTICES];
         for (int i = 0; i < Constants.NUMBER_OF_VERTICES; i++) {
             adjacentVerticesList[i] = new LinkedList<>();

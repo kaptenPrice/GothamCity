@@ -1,8 +1,13 @@
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.function.Function;
+import java.util.stream.IntStream;
+
 class MinHeapTest {
 
+    //Test if minHeap arrange by MinHeap rules when we insert new nodes to tree and if extractMin exctracts the root when called.
     @Test
     void minHeapIntegrationTest() {
         MinHeap minHeap = new MinHeap();
@@ -33,30 +38,14 @@ class MinHeapTest {
         minHeap.insert(treeOfHeadPhones[4]);
         minHeap.insert(treeOfHeadPhones[2]);
         minHeap.insert(treeOfHeadPhones[0]);
+        minHeap.extractMin();
 
-
-
-
-        for (int i = 0; i <= treeOfHeadPhones.length; i++) {
-            try {
-                System.out.println(" Vertex: " + minHeap.getTreeOfHeapNodes()[i].getVertex());
-            }
-            catch (NullPointerException e) {
-                System.err.println(e);
-            }
+        int[]expectedVertexArr={-1,5,4,3,2};
+        int[]expectedDistansArr={Integer.MIN_VALUE,7,10,15,5011};
+        for (int i = 0; i <= treeOfHeadPhones.length-1; i++) {
+            Assert.assertEquals(expectedVertexArr[i],minHeap.getTreeOfHeapNodes()[i].getVertex());
+            Assert.assertEquals(expectedDistansArr[i],minHeap.getTreeOfHeapNodes()[i].getDistance());
         }
-        for (int i = 0; i <= treeOfHeadPhones.length; i++) {
-            try {
-                System.out.println("   Distance: " + minHeap.getTreeOfHeapNodes()[i].getDistance());
-            }
-            catch (NullPointerException e) {
-                System.err.println(e);
-            }
-
-        }
-
-
-        //TODO actual, expected, try calling extractMin to see if the order changes.
     }
 
 

@@ -55,45 +55,56 @@ class Hub {
         }
     }
 
-     private void planTrip(Graph graph) {
+    private void planTrip(Graph graph) {
         if (graph == null) {
             System.out.println("Please create a graph first. ");
             return;
         }
         System.out.println("\nWhere do you want to start? \nPress 0 to return\n");
+        while (true) {
+            for (int i = 1; i <= Constants.NAMES.length; i++) {
+                System.out.println(i + " - " + Constants.NAMES[i - 1]);
+            }
+            try {
+                start = sc.nextInt();
+                if (start <= 0 || start > Constants.NUMBER_OF_VERTICES) {
+                    System.out.println(start + " is not a valid stop");
 
-        for (int i = 1; i <= Constants.NAMES.length; i++) {
-            System.out.println(i + " - " + Constants.NAMES[i - 1]);
+                } else break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input, please try again.");
+                sc.next();
+            }
         }
-        try {
-            start = sc.nextInt();
-            if (start == 0) return;
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input, please try again.");
-            sc.next();
-        }
-        System.out.println("\nWhere do you want to go? \nPress 0 to return\n");
+        while (true) {
+            System.out.println("\nWhere do you want to go? (Destination) \nPress 0 to return\n");
 
-        for (int i = 1; i <= Constants.NAMES.length; i++) {
-            System.out.println(i + " - " + Constants.NAMES[i - 1]);
-        }
-        try {
-            destination = sc.nextInt();
-            if (destination == 0) return;
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input, please try again.");
-            sc.next();
-        }
-        if (start > 0 && start < 11 && destination > 0 && destination < 11) {
-           showDistance(graph, start, destination);
+            for (int i = 1; i <= Constants.NAMES.length; i++) {
+                System.out.println(i + " - " + Constants.NAMES[i - 1]);
+            }
+            try {
+                destination = sc.nextInt();
+                if (destination <= 0 || destination > Constants.NUMBER_OF_VERTICES) {
+                    System.out.println(destination + " is not a valid stop, try again");
+
+                } else showDistance(graph, start, destination);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input, please try again.");
+                sc.next();
+            }
+           /* if (start > 0 && start < Constants.NUMBER_OF_VERTICES + 1 && destination > 0 && destination < Constants.NUMBER_OF_VERTICES) {
+                showDistance(graph, start, destination);
+            }*/
+
         }
     }
 
     //call Dijkstra to obtain the result set and print the result.
     HeapNode[] showDistance(Graph graph, int start, int destination) {
         this.graph = graph;
-        HeapNode[] resultSet = dijkstra.dijkstraGetMinDistance(graph, start -1);
-        utility.printDijkstra(resultSet, start -1, destination -1);
+        HeapNode[] resultSet = dijkstra.dijkstraGetMinDistance(graph, start - 1);
+        utility.printDijkstra(resultSet, start - 1, destination - 1);
 
         return resultSet;
     }

@@ -1,3 +1,6 @@
+/**
+ * This class holds information about the heap nodes: vertex id and distance.
+ */
 public class HeapNode {
     private int vertex;
     private int distance;

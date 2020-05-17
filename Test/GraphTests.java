@@ -15,7 +15,7 @@ public class GraphTests {
         Graph testGraph = new Graph();
         testGraph.addEdge(0, 1, 9);
         int actualSource = testGraph.adjacentVerticesList[0].get(0).source;
-        int actualWeight = testGraph.adjacentVerticesList[0].get(0).weight;
+        int actualWeight = testGraph.adjacentVerticesList[0].get(0).distance;
         int actualDestination = testGraph.adjacentVerticesList[0].get(0).destination;
         int expectedSource = 0;
         int expectedDestination = 1;
@@ -30,7 +30,7 @@ public class GraphTests {
         Graph testGraph = new Graph();
         testGraph.addEdge(0, 1, 9);
         int actualSource = testGraph.adjacentVerticesList[1].get(0).source;
-        int actualWeight = testGraph.adjacentVerticesList[1].get(0).weight;
+        int actualWeight = testGraph.adjacentVerticesList[1].get(0).distance;
         int actualDestination = testGraph.adjacentVerticesList[1].get(0).destination;
         int expectedSource = 1;
         int expectedDestination = 0;

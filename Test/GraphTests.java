@@ -2,6 +2,8 @@ import org.junit.jupiter.api.*;
 
 public class GraphTests {
 
+
+    //Unit testning that constructor in Graph creates a [] with right lenght
     @Test
     void testGraphConstructor() {
         Graph graph = new Graph();
@@ -10,6 +12,7 @@ public class GraphTests {
         Assertions.assertEquals(expected, actual);
     }
 
+    //Unit testning that addEdge adds the right values to edge
     @Test
     void testAddEdgeToAdjacentVerticesList() {
         Graph testGraph = new Graph();
@@ -25,6 +28,7 @@ public class GraphTests {
         Assertions.assertEquals(expectedW, actualWeight);
     }
 
+    //Testing that addEdge creates way back from source
     @Test
     void testAddEdgeCreatesWayBackFromSource() {
         Graph testGraph = new Graph();
@@ -39,7 +43,7 @@ public class GraphTests {
         Assertions.assertEquals(expectedDestination, actualDestination);
         Assertions.assertEquals(expectedW, actualWeight);
     }
-
+//Testing that the edges are connected in innerlinkedList
     @Test
     void testConnectionBetweenEdgesInLinkedList() {
         Graph testGraph = new Graph();

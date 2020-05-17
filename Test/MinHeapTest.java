@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 class MinHeapTest {
 
-    //Test if minHeap arrange by MinHeap rules when we insert new nodes to tree and if extractMin exctracts the root when called.
+    //Test if minHeap arrange by MinHeap rules when we insert new nodes to tree and if extractMin extracts the root when called.
     @Test
     void minHeapIntegrationTest() {
         MinHeap minHeap = new MinHeap();

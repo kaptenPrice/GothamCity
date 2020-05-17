@@ -7,12 +7,12 @@ class RandomGraphMaker {
     Graph graph;
 
     /**
-     *
      * @return the created graph.
      */
     Graph createNewGraph() {
         graph = setGraph();
         while (!secureGraphNodesAreUnique(graph) || !checkIfGraphIsCoherent(countWeightBetweenNodes(graph))) {
+            System.gc();
             graph = setGraph();
         }
 
@@ -41,18 +41,16 @@ class RandomGraphMaker {
                 }
             }
         }
-         return graph;
+        return graph;
     }
 
     /**
-     *
-     *
      * @param graph
      * @return
      */
     boolean secureGraphNodesAreUnique(Graph graph) {
-      this.graph=graph;
-        if (graph==null) {
+        this.graph = graph;
+        if (graph == null) {
             graph = setGraph();
         }
         for (int i = 0; i < graph.adjacentVerticesList.length; i++) {
@@ -65,7 +63,7 @@ class RandomGraphMaker {
                 }
                 //if node has three neighbours, check so that 0 and 2 are not the same
                 if (graph.adjacentVerticesList[i].size() > 2) {
-                    if (graph.adjacentVerticesList[i].get(firstElement) == graph.adjacentVerticesList[i].get(lastElement)) {
+                    if (graph.adjacentVerticesList[i].get(firstElement).destination == graph.adjacentVerticesList[i].get(lastElement).destination) {
                         return false;
                     }
                 }
@@ -84,6 +82,11 @@ class RandomGraphMaker {
             if (resultSet[i].getDistance() < 0 || resultSet[i].getDistance() > 100) {
                 return false;
             }
+            /*for (int j = 1; j < resultSet.length-1; j++) {
+                if (resultSet[i].getVertex() == resultSet[j].getVertex()) {
+                    return false;
+                }
+            }*/
         }
         return true;
     }

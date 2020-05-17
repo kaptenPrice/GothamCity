@@ -7,7 +7,6 @@ import java.util.Scanner;
 class Hub {
     private Utility utility = new Utility();
     private Graph graph;
-    private int start, destination;
     private Dijkstra dijkstra = new Dijkstra();
     private RandomGraphMaker randomGraphMaker = new RandomGraphMaker();
     private Scanner sc;
@@ -61,6 +60,7 @@ class Hub {
 
     /**
      * This method takes user input to define source and destination. It makes sure all input values are legitimate choices.
+     *
      * @param graph random graph to be passed on to showDistance.
      */
     private void planTrip(Graph graph) {
@@ -68,6 +68,7 @@ class Hub {
             System.out.println("Please create a graph first. ");
             return;
         }
+        int start;
         while (true) {
             System.out.println("\nWhere do you want to start? \nPress 0 to return\n");
             for (int i = 1; i <= Constants.NAMES.length; i++) {
@@ -75,7 +76,7 @@ class Hub {
             }
             try {
                 start = sc.nextInt();
-                if (start <= 0 || start > Constants.NUMBER_OF_VERTICES) {
+                if (start < 0 || start > Constants.NUMBER_OF_VERTICES) {
                     System.out.println(start + " is not a valid stop");
 
                 } else break;
@@ -91,11 +92,10 @@ class Hub {
                 System.out.println(i + " - " + Constants.NAMES[i - 1]);
             }
             try {
-                destination = sc.nextInt();
-                if (destination <= 0 || destination > Constants.NUMBER_OF_VERTICES) {
+                int destination = sc.nextInt();
+                if (destination < 0 || destination > Constants.NUMBER_OF_VERTICES) {
                     System.out.println(destination + " is not a valid stop, try again");
-                }
-                else {
+                } else {
                     showDistance(graph, start, destination);
                     break;
                 }
@@ -109,8 +109,8 @@ class Hub {
     /**
      * Calls Dijkstra to obtain the result set and calls printDijkstra to print the result.
      *
-     * @param graph random graph to be passed on to Dijkstra.
-     * @param start source vertex defined by user input.
+     * @param graph       random graph to be passed on to Dijkstra.
+     * @param start       source vertex defined by user input.
      * @param destination destination vertex defined by user input.
      * @return resultSet with source, destination and the shortest path between them.
      */

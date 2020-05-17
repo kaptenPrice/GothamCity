@@ -3,7 +3,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/*
+* Final test, we are testing all functions against one graf*/
 class SystemTest {
     @Test
     void testDijkstra() {
@@ -34,22 +35,21 @@ class SystemTest {
         Assertions.assertEquals(37, testArray[6].getDistance()); //assert distance
     }
 
+    /**
+     * Tesing to create x grafs to se how the program handles big amount of ordered grafs.
+     */
     @Test
     void stressTest() {
 
         RandomGraphMaker randomGraphMaker = new RandomGraphMaker();
         Graph graph;
-        Utility utility = new Utility();
+       // Utility utility = new Utility();
         int count = 0;
-        while (count < 30) {
-            //graph = randomGraphMaker.setGraph();
-            graph = randomGraphMaker.createNewGraph();
-         //   while (!randomGraphMaker.secureGraphNodesAreUnique(graph) || !randomGraphMaker.checkIfGraphIsCoherent(randomGraphMaker.countWeightBetweenNodes(graph))) {
-           //     graph = randomGraphMaker.setGraph();
-           // }
-
-            utility.printGraph(graph);
+        while (count < 10) {
+            randomGraphMaker.createNewGraph();
             count++;
+            System.out.println(count);
+
+            }
         }
     }
-}

@@ -76,10 +76,14 @@ class Hub {
             }
             try {
                 start = sc.nextInt();
-                if (start <= 0 || start > Constants.NUMBER_OF_VERTICES) {
+                if (start < 0 || start > Constants.NUMBER_OF_VERTICES) {
                     System.out.println(start + " is not a valid stop");
 
-                } else break;
+                }
+                else if (start == 0) {
+                    return;
+                }
+                else break;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input, please try again.");
                 sc.next();
@@ -93,8 +97,11 @@ class Hub {
             }
             try {
                 destination = sc.nextInt();
-                if (destination <= 0 || destination > Constants.NUMBER_OF_VERTICES) {
+                if (destination < 0 || destination > Constants.NUMBER_OF_VERTICES) {
                     System.out.println(destination + " is not a valid stop, try again");
+                }
+                else if (destination == 0) {
+                    return;
                 }
                 else {
                     showDistance(graph, start, destination);

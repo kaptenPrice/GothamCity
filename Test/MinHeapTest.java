@@ -2,12 +2,11 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.function.Function;
-import java.util.stream.IntStream;
-
 class MinHeapTest {
 
-    //Test if minHeap arrange by MinHeap rules when we insert new nodes to tree and if extractMin exctracts the root when called.
+    /**
+     * Test if minHeap arranges by MinHeap rules when we insert new nodes to tree and if extractMin extracts the root when called.
+     */
     @Test
     void minHeapIntegrationTest() {
         MinHeap minHeap = new MinHeap();
@@ -41,15 +40,16 @@ class MinHeapTest {
         minHeap.extractMin();
 
         int[]expectedVertexArr={-1,5,4,3,2};
-        int[]expectedDistansArr={Integer.MIN_VALUE,7,10,15,5011};
+        int[]expectedDistanceArr={Integer.MIN_VALUE,7,10,15,5011};
         for (int i = 0; i <= treeOfHeadPhones.length-1; i++) {
             Assert.assertEquals(expectedVertexArr[i],minHeap.getTreeOfHeapNodes()[i].getVertex());
-            Assert.assertEquals(expectedDistansArr[i],minHeap.getTreeOfHeapNodes()[i].getDistance());
+            Assert.assertEquals(expectedDistanceArr[i],minHeap.getTreeOfHeapNodes()[i].getDistance());
         }
     }
 
-
-    //Asserting that each vertex in the heap node array gets their assigned value and that it returns false if that is not the case.
+    /**
+     * Asserting that each vertex in the heap node array gets their assigned value and that it returns false if that is not the case.
+     */
     @Test
     void insert() {
         MinHeap minHeap = new MinHeap();
@@ -67,7 +67,9 @@ class MinHeapTest {
         }
     }
 
-    // Making sure currentSize is being updated correctly and that currentElement is following it.
+    /**
+     *  Making sure currentSize is being updated correctly and that currentElement is following it.
+     */
     @Test
     void testCurrentSizeInsert() {
         MinHeap minHeap = new MinHeap();
@@ -84,6 +86,9 @@ class MinHeapTest {
         }
     }
 
+    /**
+     * Checks if bubbleUp gives the correct parent and current id.
+     */
     @Test
     void bubbleUp() {
         MinHeap minHeap = new MinHeap();
@@ -111,24 +116,10 @@ class MinHeapTest {
         }
     }
 
-    @Test
-    void extractMin() {
-        MinHeap minHeap = new MinHeap();
-        HeapNode expectedHeapNode = new HeapNode();
-        expectedHeapNode.setDistance(1);
-        int currentTestSize = 0;
 
-        for (int i = 1; i < Constants.NUMBER_OF_VERTICES; i++) {
-            minHeap.insert(expectedHeapNode);
-            currentTestSize++;
-        }
-    //    HeapNode actualHeapNode = minHeap.treeOfHeapNodes[minHeap.currentSize];
-    //    actualHeapNode.vertex = 1; //TODO should be assigned in the method itself, but returns -1 and index out of bounds every time....
-
-   //     Assertions.assertEquals(expectedHeapNode.vertex, actualHeapNode.vertex);
-        Assertions.assertDoesNotThrow(minHeap::extractMin);
-    }
-
+    /**
+     * Checks if sink down returns the correct smallest.
+     */
     @Test
     void sinkDown() {
         MinHeap minHeap = new MinHeap();
@@ -144,6 +135,9 @@ class MinHeapTest {
         Assertions.assertEquals(expectedSmallest, actualSmallest);
     }
 
+    /**
+     * Checks that swap swaps the positions.
+     */
     @Test
     void swap() {
         MinHeap minHeap = new MinHeap();
@@ -154,21 +148,9 @@ class MinHeapTest {
             mH[i].setVertex(i);
             mH[i].setDistance(Integer.MAX_VALUE);
         }
-       // minHeap.swap(2, b);
         int expected = 1;
         int actual = mH[b].getVertex();
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test
-    void isEmpty() {
-        MinHeap minHeap = new MinHeap();
-        Assertions.assertTrue(minHeap.isEmpty());
-    }
-
-    @Test
-    void heapSize() {
-        MinHeap minHeap = new MinHeap();
-        Assertions.assertEquals(0, minHeap.getCurrentSize());
-    }
 }

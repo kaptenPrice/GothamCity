@@ -3,6 +3,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class DijkstraTest {
+
+    /**
+     * Asserts the correct length of the heap node array in createArrayOfHeapNodes.
+     */
     @Test
     void testLengthOfArrayOfHeapNodes() {
         Dijkstra dijkstraTest = new Dijkstra();
@@ -12,6 +16,9 @@ class DijkstraTest {
         Assert.assertEquals(expectedLength, actualLength);
     }
 
+    /**
+     * Checks that all distances are set to max value in createArrayOfHeapNodes.
+     */
     @Test
     void testIfDistanceIsMaxValue() {
         int expectedValue = Integer.MAX_VALUE;
@@ -23,6 +30,9 @@ class DijkstraTest {
         }
     }
 
+    /**
+     * Checks that all vertices in createArrayOfHeapNodes got an id.
+     */
     @Test
     void testIfVerticesHasValues() {
         Dijkstra dijkstraTest = new Dijkstra();
@@ -31,9 +41,11 @@ class DijkstraTest {
             int actual = actualTestArr[i].getVertex();
             Assert.assertEquals(i, actual);
         }
-
     }
 
+    /**
+     * Checks that minHeap gets the correct size in createMinHeap.
+     */
     @Test
     void testCreateMinHeapSize() {
         Dijkstra dijkstraTest = new Dijkstra();
@@ -44,6 +56,10 @@ class DijkstraTest {
         Assert.assertEquals(expected, actualSize);
     }
 
+    /**
+     * Checks that each vertex in the heap node got the correct vertex id.
+     * Starts with edge case at index 0 that always should be -1, loops through rest and asserts.
+     */
     @Test
     void testCreateMinHeap() {
         Dijkstra dijkstraTest = new Dijkstra();

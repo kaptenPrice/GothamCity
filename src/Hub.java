@@ -21,7 +21,7 @@ class Hub {
     void menu() {
 
         while (true) {
-            System.out.println("\nWelcome to RouteCity! \n Enter '1' to create a new network\n Enter '2' to exit.");
+            System.out.println("\nWelcome to Gotham City! \n Enter '1' to see the city network\n Enter '2' to exit.");
             sc = new Scanner(System.in);
             String input = sc.nextLine();
             if (input.contains(" ")) {
@@ -30,23 +30,8 @@ class Hub {
             }
             switch (input) {
                 case "1":
-                    System.out.println("\n Enter '1' to plan a new trip\n Enter '2' to return.\n");
-                    String choice = sc.nextLine();
-                    if (choice.contains(" ")) {
-                        System.out.println("Invalid input, please try again.");
-                        continue;
-                    }
-                    switch (choice) {
-                        case "1":
-                            graph = randomGraphMaker.createNewGraph();
-                            planTrip(graph);
-                            break;
-                        case "2":
-                            System.out.println("Returning");
-                            break;
-                        default:
-                            System.out.println("Invalid input, please try again.");
-                    }
+                    graph = randomGraphMaker.createNewGraph();
+                    planTrip(graph);
                     break;
                 case "2":
                     System.exit(0);
@@ -79,11 +64,9 @@ class Hub {
                 if (start < 0 || start > Constants.NUMBER_OF_VERTICES) {
                     System.out.println(start + " is not a valid stop");
 
-                }
-                else if (start == 0) {
+                } else if (start == 0) {
                     return;
-                }
-                else break;
+                } else break;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input, please try again.");
                 sc.next();
@@ -99,11 +82,9 @@ class Hub {
                 int destination = sc.nextInt();
                 if (destination < 0 || destination > Constants.NUMBER_OF_VERTICES) {
                     System.out.println(destination + " is not a valid stop, try again");
-                }
-                else if (destination == 0) {
+                } else if (destination == 0) {
                     return;
-                }
-                else {
+                } else {
                     showDistance(graph, start, destination);
                     break;
                 }
@@ -117,8 +98,8 @@ class Hub {
     /**
      * Calls Dijkstra to obtain the result set and calls printDijkstra to print the result.
      *
-     * @param graph random graph to be passed on to Dijkstra.
-     * @param start source vertex defined by user input.
+     * @param graph       random graph to be passed on to Dijkstra.
+     * @param start       source vertex defined by user input.
      * @param destination destination vertex defined by user input.
      * @return resultSet with source, destination and the shortest path between them.
      */

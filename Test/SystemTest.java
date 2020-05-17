@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SystemTest {
     @Test
-    void finalTest() {
+    void stressTest() {
 
         RandomGraphMaker randomGraphMaker = new RandomGraphMaker();
         Graph graph;

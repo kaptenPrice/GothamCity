@@ -15,7 +15,7 @@ class Utility {
 
     void printDijkstra(HeapNode[] resultSet, int source, int destination) {
         System.out.println("\n\n\nThe shortest path to your destination:");
-        System.out.println("*****" + Constants.NAMES[source] + " to " + Constants.NAMES[destination] + " distance is " + resultSet[destination].distance + "*****");
+        System.out.println("*****" + Constants.NAMES[source] + " to " + Constants.NAMES[destination] + " distance is " + resultSet[destination].getDistance() + "*****");
     }
 }
 /*--              --

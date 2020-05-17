@@ -1,42 +1,48 @@
 import java.util.LinkedList;
 
+/**
+ * This class contains methods related to calculating the shortest path using Dijkstra's algorithm.
+ * */
 class Dijkstra {
-    private Utility utility = new Utility();
-    private Graph graph;
     private int source;
     private HeapNode[] arrayOfHeapNodes;
     private MinHeap minHeap;
 
-
+/**
+ * This method calculates the shortest distance between the source (user input) and all nodes.
+ *
+ * @param graph graph that contains the nodes and edges used in the calculation.
+ * @param source user defined source node from which the distance is calculated to all other nodes.
+ * @return HeapNode[] an array of heap nodes that contains the result set of shortest distance between source and all other nodes.
+ * */
     HeapNode[] dijkstraGetMinDistance(Graph graph, int source) {
         setSource(source);
         boolean[] isVisited = new boolean[Constants.NUMBER_OF_VERTICES];
         setArrayOfHeapNodes(createArrayOfHeapNodes());
         //decrease the distance for the first index
-        getArrayOfHeapNodes()[getSource()].distance = 0;
+        getArrayOfHeapNodes()[getSource()].setDistance(0);
         setMinHeap(createMinHeap());
 
-        //while minHeap is not empty
         while (!getMinHeap().isEmpty()) {
             //Extract the min
             HeapNode extractedNode = getMinHeap().extractMin();
             //Extract vertex
-            int currentRoot = extractedNode.vertex;
+            int currentRoot = extractedNode.getVertex();
             isVisited[currentRoot] = true;
             //iterate through all the adjacent vertices
             LinkedList<Edge> listOfEdges = graph.adjacentVerticesList[currentRoot];
             for (Edge edge : listOfEdges) {
                 int destination = edge.destination;
-                //Only if destination vertex is not present in isVisited
+
                 if (!isVisited[destination]) {
                     //Check if distance need update or not
                     //means check total weight from source to vertex_V is
                     //less then the current distance value, if yes then update the distance
-                    int newWeight = getArrayOfHeapNodes()[currentRoot].distance + edge.weight;
-                    int currentWeight = getArrayOfHeapNodes()[destination].distance;
+                    int newWeight = getArrayOfHeapNodes()[currentRoot].getDistance() + edge.weight;
+                    int currentWeight = getArrayOfHeapNodes()[destination].getDistance();
                     if (currentWeight > newWeight) {
                         decreaseWeight(getMinHeap(), newWeight, destination);
-                        getArrayOfHeapNodes()[destination].distance = newWeight;
+                        getArrayOfHeapNodes()[destination].setDistance(newWeight);
                     }
                 }
             }
@@ -45,16 +51,27 @@ class Dijkstra {
         return getArrayOfHeapNodes();
     }
 
+    /**
+     * Creates and returns an array of heap nodes (containing vertex and distance).
+     * Each node is filled in with vertex id (0-9) and distance (integer's max value).
+     *
+     * @return HeapNode[] array of heap nodes
+     * */
     HeapNode[] createArrayOfHeapNodes() {
         arrayOfHeapNodes = new HeapNode[Constants.NUMBER_OF_VERTICES];
         for (int i = 0; i < Constants.NUMBER_OF_VERTICES; i++) {
             arrayOfHeapNodes[i] = new HeapNode();
-            arrayOfHeapNodes[i].vertex = i;
-            arrayOfHeapNodes[i].distance = Integer.MAX_VALUE;
+            arrayOfHeapNodes[i].setVertex(i);
+            arrayOfHeapNodes[i].setDistance(Integer.MAX_VALUE);
         }
         return arrayOfHeapNodes;
     }
 
+    /**
+     *
+     *
+     * @return MinHeap
+     * */
     MinHeap createMinHeap() {
         setMinHeap(new MinHeap());
         for (int i = 0; i < Constants.NUMBER_OF_VERTICES; i++) {
@@ -68,27 +85,10 @@ class Dijkstra {
         //get the index which distance needs to decrease
         int index = getMinHeap().indexes[vertex];
         //get the node and update its value
-        //HeapNode node = getMinHeap().treeOfHeapNodes[index];
         HeapNode node = getMinHeap().getTreeOfHeapNodes()[index];
-        node.distance = newWeight;
+        node.setDistance(newWeight);
         getMinHeap().bubbleUp(index);
     }
-
-/*
-    void checkIfNodesAreConnected(HeapNode[] resultSet) {
-        System.out.println("Walking in the checkIfNodesAreConnected line");
-        for (int i = 0; i < Constants.NUMBER_OF_VERTICES; i++) {
-            if (resultSet[i].distance < 0 || resultSet[i].distance > 100) {
-                System.out.println("Not a coherent graph, printing a new one");
-
-                RandomGraphMaker randomGraphMaker = new RandomGraphMaker();
-                graph = randomGraphMaker.setGraph();
-                randomGraphMaker.secureGraphNodesAreUnique(graph);
-                dijkstraGetMinDistance(graph, getSource());
-                utility.printGraph(graph);
-            }
-        }
-    }*/
 
     void setSource(int source) {
         this.source = source;

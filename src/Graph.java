@@ -1,9 +1,11 @@
 import java.util.LinkedList;
 
 class Graph {
+
     LinkedList<Edge>[] adjacentVerticesList;
 
     Graph() {
+
         adjacentVerticesList = new LinkedList[Constants.NUMBER_OF_VERTICES];
         //initialize adjacency lists for all the vertices
         //Create 10 LinkedLists and add the to adjacentVerticesList

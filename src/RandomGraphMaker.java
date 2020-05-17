@@ -24,11 +24,12 @@ class RandomGraphMaker {
 
     /**
      * Provides data for the graph. Makes sure each node is connected to 2 or 3 other nodes and that vertex and neighbour are not the same.
-     *
+     *If setGraph gets stuck in the loop (more then 2 sec. to produce a new graph) we will return new Graph which resets the graph object.
      * @return graph
      */
     Graph setGraph() {
         graph = new Graph();
+        long startTime = System.nanoTime();
 
         for (int i = 0; i < Constants.NUMBER_OF_VERTICES; i++) {
             while (graph.adjacentVerticesList[i].size() < 2) {
@@ -38,6 +39,11 @@ class RandomGraphMaker {
                 if (graph.adjacentVerticesList[i].size() < 3 &&
                         graph.adjacentVerticesList[newNeighbour].size() < 3 && graph.adjacentVerticesList[i] != graph.adjacentVerticesList[newNeighbour]) {
                     graph.addEdge(i, newNeighbour, randomWeight);
+                }
+                long endTime=System.nanoTime();
+                long elapsedTime=(endTime-startTime)/1000000;
+                if (elapsedTime>1000){
+                    return new Graph();
                 }
             }
         }

@@ -48,9 +48,8 @@ class SystemTest {
 
         RandomGraphMaker randomGraphMaker = new RandomGraphMaker();
         Graph graph;
-       // Utility utility = new Utility();
         int count = 0;
-        while (count < 10) {
+        while (count < 400) {
             randomGraphMaker.createNewGraph();
             count++;
             System.out.println(count);

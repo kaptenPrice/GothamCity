@@ -36,7 +36,6 @@ class DijkstraTest {
     @Test
     void testcreateMinHeapSize() {
         Dijkstra dijkstraTest = new Dijkstra();
-        HeapNode[] actualArrayOfHeapNodes = dijkstraTest.createArrayOfHeapNodes();
         MinHeap acutalMinHeap = dijkstraTest.createMinHeap();
         int actualSize = acutalMinHeap.getCurrentSize();
         int expected = Constants.NUMBER_OF_VERTICES;
@@ -46,7 +45,6 @@ class DijkstraTest {
     @Test
     void testcreateMinHeap() {
         Dijkstra dijkstraTest = new Dijkstra();
-        HeapNode[] actualArrayOfHeapNodes = dijkstraTest.createArrayOfHeapNodes();
         MinHeap acutalMinHeap = dijkstraTest.createMinHeap();
         HeapNode[] actualHeapNodeArr = acutalMinHeap.getTreeOfHeapNodes();
         Assert.assertEquals(-1, actualHeapNodeArr[0].vertex);

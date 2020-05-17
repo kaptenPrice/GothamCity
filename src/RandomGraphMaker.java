@@ -7,8 +7,9 @@ class RandomGraphMaker {
     Graph graph;
 
     /**
+     * Keeps creating new graphs until an acceptable graph is created.
      *
-     * @return the created graph.
+     * @return graph the accepted graph.
      */
     Graph createNewGraph() {
         graph = setGraph();
@@ -21,9 +22,7 @@ class RandomGraphMaker {
     }
 
     /**
-     * Provide data for the graph. Make sure each node is connected to 2 or 3 other nodes.
-     * Loop until current vertex has at least 2 neighbours
-     * Making sure no vertex has more than 3 edges and that vertex and neighbour are not the same.
+     * Provides data for the graph. Makes sure each node is connected to 2 or 3 other nodes and that vertex and neighbour are not the same.
      *
      * @return graph
      */
@@ -45,10 +44,10 @@ class RandomGraphMaker {
     }
 
     /**
+     * Ensure that each vertex's neighbours are not repeated.
      *
-     *
-     * @param graph
-     * @return
+     * @param graph random graph to be validated.
+     * @return true/false depending on if the graph is acceptable or not.
      */
     boolean secureGraphNodesAreUnique(Graph graph) {
       this.graph=graph;
@@ -58,12 +57,13 @@ class RandomGraphMaker {
         for (int i = 0; i < graph.adjacentVerticesList.length; i++) {
             int firstElement = 0;
             int lastElement = graph.adjacentVerticesList[i].size() - 1;
+
             for (int j = 0; j < lastElement; j++) {
-                //checks so that 0 - 1 and 1 - 2  are not the same
+
                 if (graph.adjacentVerticesList[i].get(j).destination == graph.adjacentVerticesList[i].get(j + 1).destination) {
                     return false;
                 }
-                //if node has three neighbours, check so that 0 and 2 are not the same
+
                 if (graph.adjacentVerticesList[i].size() > 2) {
                     if (graph.adjacentVerticesList[i].get(firstElement) == graph.adjacentVerticesList[i].get(lastElement)) {
                         return false;
@@ -74,11 +74,23 @@ class RandomGraphMaker {
         return true;
     }
 
+    /**
+     * Calls dijkstraGetMinDistance and passes on the result set.
+     *
+     * @param graph current graph.
+     * @return HeapNode[] result set.
+     */
     HeapNode[] countWeightBetweenNodes(Graph graph) {
         this.graph = graph;
         return getMinDistance.dijkstraGetMinDistance(graph, 0);
     }
 
+    /**
+     * Makes sure no result is infinity, meaning that it is possible to get from all nodes to all nodes.
+     *
+     * @param resultSet result of Dijkstra's algorithm.
+     * @return true/false depending on if the graph is coherent or not.
+     */
     boolean checkIfGraphIsCoherent(HeapNode[] resultSet) {
         for (int i = 0; i < Constants.NUMBER_OF_VERTICES; i++) {
             if (resultSet[i].getDistance() < 0 || resultSet[i].getDistance() > 100) {

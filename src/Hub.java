@@ -61,6 +61,7 @@ class Hub {
 
     /**
      * This method takes user input to define source and destination. It makes sure all input values are legitimate choices.
+     *
      * @param graph random graph to be passed on to showDistance.
      */
     private void planTrip(Graph graph) {

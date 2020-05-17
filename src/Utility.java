@@ -6,7 +6,7 @@ class Utility {
         for (int i = 0; i < Constants.NUMBER_OF_VERTICES; i++) {
             LinkedList<Edge> list = graph.adjacentVerticesList[i];
           for (Edge edge : list) {
-                System.out.println(Constants.NAMES[i] + " is connected to " + Constants.NAMES[edge.destination] + " and distance is " + edge.weight);
+                System.out.println(Constants.NAMES[i] + " is connected to " + Constants.NAMES[edge.destination] + " and distance is " + edge.distance);
             }
             System.out.println();
         }

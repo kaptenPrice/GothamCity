@@ -14,7 +14,7 @@ public class EdgeTest {
 
         Assertions.assertEquals(expectedSource, edge.source);
         Assertions.assertEquals(expectedDest, edge.destination);
-        Assertions.assertEquals(expectedWeight, edge.weight);
+        Assertions.assertEquals(expectedWeight, edge.distance);
 
     }
 

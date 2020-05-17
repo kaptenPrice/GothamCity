@@ -10,6 +10,10 @@ class Dijkstra {
 
 /**
  * This method calculates the shortest distance between the source (user input) and all nodes.
+ * The array of booleans isVisited[] keeps track of what vertices have been visited. Every time a node has been extracted and used as root, it is marked as visited (true).
+ * Calling createArrayOfHeapNodes to get a heap node array to work with.
+ * The source node's distance is set to 0 by default and is also the first vertex to be visited.
+ * Calling createArrayOfHeapNodes to get a heap to work with.
  *
  * @param graph graph that contains the nodes and edges used in the calculation.
  * @param source user defined source node from which the distance is calculated to all other nodes.
@@ -19,35 +23,29 @@ class Dijkstra {
         setSource(source);
         boolean[] isVisited = new boolean[Constants.NUMBER_OF_VERTICES];
         setArrayOfHeapNodes(createArrayOfHeapNodes());
-        //decrease the distance for the first index
         getArrayOfHeapNodes()[getSource()].setDistance(0);
         setMinHeap(createMinHeap());
 
         while (!getMinHeap().isEmpty()) {
-            //Extract the min
             HeapNode extractedNode = getMinHeap().extractMin();
-            //Extract vertex
             int currentRoot = extractedNode.getVertex();
             isVisited[currentRoot] = true;
-            //iterate through all the adjacent vertices
             LinkedList<Edge> listOfEdges = graph.adjacentVerticesList[currentRoot];
             for (Edge edge : listOfEdges) {
                 int destination = edge.destination;
 
+                //Check if distance needs to update or not, i.e. check if total distance from source to vertex is
+                //less then the current distance value, if yes then update the distance.
                 if (!isVisited[destination]) {
-                    //Check if distance need update or not
-                    //means check total weight from source to vertex_V is
-                    //less then the current distance value, if yes then update the distance
-                    int newWeight = getArrayOfHeapNodes()[currentRoot].getDistance() + edge.weight;
-                    int currentWeight = getArrayOfHeapNodes()[destination].getDistance();
-                    if (currentWeight > newWeight) {
-                        decreaseWeight(getMinHeap(), newWeight, destination);
-                        getArrayOfHeapNodes()[destination].setDistance(newWeight);
+                    int newDistance = getArrayOfHeapNodes()[currentRoot].getDistance() + edge.distance;
+                    int currentDistance = getArrayOfHeapNodes()[destination].getDistance();
+                    if (currentDistance > newDistance) {
+                        decreaseDistance(getMinHeap(), newDistance, destination);
+                        getArrayOfHeapNodes()[destination].setDistance(newDistance);
                     }
                 }
             }
         }
-
         return getArrayOfHeapNodes();
     }
 
@@ -68,7 +66,8 @@ class Dijkstra {
     }
 
     /**
-     *
+     * Creates and returns a new MinHeap and calls insert() to insert the heap nodes
+     * created in createArrayOfHeapNodes into the heap.
      *
      * @return MinHeap
      * */
@@ -80,37 +79,45 @@ class Dijkstra {
         return getMinHeap();
     }
 
-    //minheap has to be sent into the method in order for the method to get the correct heap.
-    private void decreaseWeight(MinHeap minHeap, int newWeight, int vertex) {
-        //get the index which distance needs to decrease
-        int index = getMinHeap().indexes[vertex];
-        //get the node and update its value
+    /**
+     * Updates the distance to the current destination vertex.
+     * Calls bubbleUp to update the position in the heap.
+     * Minheap has to be sent into the method in order for the method to get the correct heap version.
+     *
+     * @param minHeap current version of the heap.
+     * @param newDistance new distance to be set.
+     * @param destinationVertex defines what index the new distance should be set at.
+     * */
+    private void decreaseDistance(MinHeap minHeap, int newDistance, int destinationVertex) {
+        int index = getMinHeap().indexes[destinationVertex];
         HeapNode node = getMinHeap().getTreeOfHeapNodes()[index];
-        node.setDistance(newWeight);
+        node.setDistance(newDistance);
         getMinHeap().bubbleUp(index);
     }
 
-    void setSource(int source) {
+
+
+    private void setSource(int source) {
         this.source = source;
     }
 
-    int getSource() {
+    private int getSource() {
         return source;
     }
 
-    MinHeap getMinHeap() {
+    private MinHeap getMinHeap() {
         return minHeap;
     }
 
-    void setMinHeap(MinHeap minHeap) {
+    private void setMinHeap(MinHeap minHeap) {
         this.minHeap = minHeap;
     }
 
-    HeapNode[] getArrayOfHeapNodes() {
+    private HeapNode[] getArrayOfHeapNodes() {
         return arrayOfHeapNodes;
     }
 
-    void setArrayOfHeapNodes(HeapNode[] arrayOfHeapNodes) {
+    private void setArrayOfHeapNodes(HeapNode[] arrayOfHeapNodes) {
         this.arrayOfHeapNodes = arrayOfHeapNodes;
     }
 

@@ -6,6 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 /*
 * Final test, we are testing all functions against one graf*/
 class SystemTest {
+
+    /**
+     * Asserts that each node in the fixed graph gets the correct vertex index and distance.
+     * Asserts that Dijkstra calculates the correct shortest possible between vertices 4 and 7 using a fixed graph.
+     */
     @Test
     void testDijkstra() {
         Dijkstra testDijkstra = new Dijkstra();

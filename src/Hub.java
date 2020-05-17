@@ -79,7 +79,11 @@ class Hub {
                 if (start < 0 || start > Constants.NUMBER_OF_VERTICES) {
                     System.out.println(start + " is not a valid stop");
 
-                } else break;
+                }
+                else if (start == 0) {
+                    return;
+                }
+                else break;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input, please try again.");
                 sc.next();
@@ -95,7 +99,11 @@ class Hub {
                 int destination = sc.nextInt();
                 if (destination < 0 || destination > Constants.NUMBER_OF_VERTICES) {
                     System.out.println(destination + " is not a valid stop, try again");
-                } else {
+                }
+                else if (destination == 0) {
+                    return;
+                }
+                else {
                     showDistance(graph, start, destination);
                     break;
                 }
@@ -109,8 +117,8 @@ class Hub {
     /**
      * Calls Dijkstra to obtain the result set and calls printDijkstra to print the result.
      *
-     * @param graph       random graph to be passed on to Dijkstra.
-     * @param start       source vertex defined by user input.
+     * @param graph random graph to be passed on to Dijkstra.
+     * @param start source vertex defined by user input.
      * @param destination destination vertex defined by user input.
      * @return resultSet with source, destination and the shortest path between them.
      */

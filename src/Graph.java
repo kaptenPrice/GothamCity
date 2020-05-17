@@ -9,7 +9,7 @@ class Graph {
     LinkedList<Edge>[] adjacentVerticesList;
 
     /**
-     * Constructor. Creates a linked list of linked lists. Each inner list is a list of the adjacent vertices of that particular index vertex.
+     * Constructor. Creates a linked list of linked lists. Each inner list is a linked list of the adjacent vertices of that particular index vertex.
      * */
     Graph() {
 
